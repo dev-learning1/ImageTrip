@@ -1,11 +1,11 @@
 package com.ImageTrip.image.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -16,22 +16,20 @@ public class ImageDTO {
         private boolean check;
     }
 
+    @Setter
     @Getter
     public static class Upload {
-
-        private List<MultipartFile> files;
-        private boolean isShared;
-
+        private MultipartFile file;
+        private boolean shared;
         private String tag;
     }
 
 
 
-//    @Getter
-//    public static class Update{
-//        private List<MultipartFile> files;
-//        private float lat;
-//        private float lon;
-//    }
-
+    @Getter
+    @ApiModel(description = "이미지 정보 업데이트를 위한 DTO")
+    public static class Update{
+        private String tag;
+        private Boolean shared;
+    }
 }

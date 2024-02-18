@@ -60,7 +60,7 @@ public class ScheduleController {
     @ApiOperation(value = "일정 삭제")
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity deleteSchedule(@PathVariable("scheduleId") int scheduleId,
-                               @RequestHeader(value = "Authorization") String token){
+                                         @RequestHeader(value = "Authorization") String token){
         long memberId = memberService.getMemberIdFromToken(token);
         scheduleService.deleteSchedule(memberId, scheduleId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -69,7 +69,7 @@ public class ScheduleController {
     @ApiOperation(value = "내가 작성한 일정 목록 조회")
     @GetMapping("/my")
     public ResponseEntity getMySchedules(/*final Pageable pageablePageSize,*/ long cursor,
-                                               @RequestHeader(value = "Authorization") String token){
+                                                                              @RequestHeader(value = "Authorization") String token){
         Member member = memberService.findMemberByToken(token);
         List<ScheduleDto.ListResponse> mySchedules = scheduleService.findMyScheduleByPage(cursor, member, PageRequest.of(0, PAGE_DEFAULT_SIZE));
         return new ResponseEntity<>(mySchedules, HttpStatus.OK);
